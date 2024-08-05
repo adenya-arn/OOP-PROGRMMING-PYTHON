@@ -1,4 +1,43 @@
-import csv
+#The two imports work for both the Item and Phone class thus showing inheritance.
+
+#from item import Item
+from phone import Phone
+
+
+#Item.instantiate_from_csv()
+#print(Item.all)
+#phone3 = Phone("sas3", 700, 10)
+
+#print(phone3.calculate_total_price())
+
+
+item1 = Phone("MyItem", 750, 2)
+print(item1.calculate_total_price())
+
+
+#Polymorphism, many forms on something, diff scenarios when we call different entities
+#Such as len function which can take string, characters etc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+# import csv
 #Intr creating and working with classes
 # 
 # 
@@ -74,7 +113,7 @@ item2.apply_discount()"""
 
 
 
-
+"""
 
 # Topic3...........Class and static methods
 
@@ -106,16 +145,28 @@ class Item:
             reader = csv.DictReader(f)    
             items = list(reader)
         
-            
+        #Not figured why it won't run yet exact as code on youtube shall keep working on it    
         for item in items:
-            Item(
+            '''Item(
                 name = item.get('name'),
                 price = float(item.get('price')),
                 quantity = float(item.get('quantity')),
-            )
+            )'''
 
     def __repr__(self):
-        return f"Item('{self.name}', {self.price}, {self.quantity})"
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    @staticmethod
+    def is_integer(num):
+        #Count out floats that are point zero
+        #For i.e 5.0, 10.0
+        if isinstance(num, float):
+            #Count out the floats that are point zero
+            return num.is_integer()
+        elif isinstance(num, int):
+            return True
+        else:
+            return False
 
 '''item1 = Item("Phone", 100, 1)
 item2 = Item("Laptop", 1000, 3)
@@ -127,4 +178,40 @@ item5 = Item("Keyboard", 75, 5)
 
 Item.instantiate_from_csv()
 print(Item.all)
+
+#Topic Inheritance ............
+
+
+class Phone(Item):
+    
+    #all = []
+    def __init__(self, name: str, price: float, quantity = 0, broken_phones = 0):
+        #Call to super function to have access to all attributes / methods
+        
+        super().__init__(
+            name, price, quantity
+        )
+        # Run validations to the received arguments
+        assert  broken_phones >= 0, f"Broken {quantity} is not greater or equal to zero!"
+
+        # Assign to self object
+        
+        self.broken_phones = broken_phones
+
+        # Actions to execute
+        #Phone.all.append(self)
+    pass
+
+
+
+phone1 = Phone("sav10", 500, 5, 1)
+print(phone1.calculate_total_price())
+#phone1.broken_phones = 1
+phone2 = Phone("sav20", 700, 5, 1)
+print(phone2.calculate_total_price())
+#phone2.broken_phones = 1
+
+print(Item.all)
+print(Phone.all)"""
+
 
